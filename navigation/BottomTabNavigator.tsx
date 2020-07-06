@@ -5,7 +5,12 @@ import * as React from 'react';
 
 import Colors from '../constants/Colors';
 import useColorScheme from '../hooks/useColorScheme';
-import TabOneScreen from '../screens/TabOneScreen';
+import OrderTypeScreen from '../screens/OrderTypeScreen';
+import OrderRiceScreen from '../screens/OrderRiceScreen';
+import OrderBeanScreen from '../screens/OrderBeanScreen';
+import OrderProteinScreen from '../screens/OrderProteinScreen';
+import OrderSideScreen from '../screens/OrderSideScreen';
+import OrderConfirmationScreen from '../screens/OrderConfirmationScreen';
 import TabTwoScreen from '../screens/TabTwoScreen';
 import { BottomTabParamList, TabOneParamList, TabTwoParamList } from '../types';
 
@@ -16,20 +21,20 @@ export default function BottomTabNavigator() {
 
   return (
     <BottomTab.Navigator
-      initialRouteName="TabOne"
+      initialRouteName="Order"
       tabBarOptions={{ activeTintColor: Colors[colorScheme].tint }}>
       <BottomTab.Screen
-        name="TabOne"
-        component={TabOneNavigator}
+        name="Order"
+        component={OrderTabNavigator}
         options={{
-          tabBarIcon: ({ color }) => <TabBarIcon name="ios-code" color={color} />,
+          tabBarIcon: ({ color }) => <TabBarIcon name="ios-restaurant" color={color} />,
         }}
       />
       <BottomTab.Screen
-        name="TabTwo"
-        component={TabTwoNavigator}
+        name="User"
+        component={UserTabNavigator}
         options={{
-          tabBarIcon: ({ color }) => <TabBarIcon name="ios-code" color={color} />,
+          tabBarIcon: ({ color }) => <TabBarIcon name="ios-person" color={color} />,
         }}
       />
     </BottomTab.Navigator>
@@ -44,30 +49,55 @@ function TabBarIcon(props: { name: string; color: string }) {
 
 // Each tab has its own navigation stack, you can read more about this pattern here:
 // https://reactnavigation.org/docs/tab-based-navigation#a-stack-navigator-for-each-tab
-const TabOneStack = createStackNavigator<TabOneParamList>();
+const OrderTabStack = createStackNavigator<TabOneParamList>();
 
-function TabOneNavigator() {
+function OrderTabNavigator() {
   return (
-    <TabOneStack.Navigator>
-      <TabOneStack.Screen
-        name="TabOneScreen"
-        component={TabOneScreen}
-        options={{ headerTitle: 'Tab One Title' }}
+    <OrderTabStack.Navigator>
+      <OrderTabStack.Screen
+        name="OrderTypeScreen"
+        component={OrderTypeScreen}
+        options={{ headerTitle: 'Start Your Order' }}
       />
-    </TabOneStack.Navigator>
+      <OrderTabStack.Screen
+        name="OrderRiceScreen"
+        component={OrderRiceScreen}
+        options={{ headerTitle: 'Pick Rice' }}
+      />
+      <OrderTabStack.Screen
+        name="OrderBeanScreen"
+        component={OrderBeanScreen}
+        options={{ headerTitle: 'Pick Beans' }}
+      />
+      <OrderTabStack.Screen
+        name="OrderProteinScreen"
+        component={OrderProteinScreen}
+        options={{ headerTitle: 'Pick a Protein' }}
+      />
+      <OrderTabStack.Screen
+        name="OrderSideScreen"
+        component={OrderSideScreen}
+        options={{ headerTitle: 'Pick Sides' }}
+      />
+      <OrderTabStack.Screen
+        name="OrderConfirmationScreen"
+        component={OrderConfirmationScreen}
+        options={{ headerTitle: 'Order Confirmation' }}
+      />
+    </OrderTabStack.Navigator>
   );
 }
 
-const TabTwoStack = createStackNavigator<TabTwoParamList>();
+const UserTabStack = createStackNavigator<TabTwoParamList>();
 
-function TabTwoNavigator() {
+function UserTabNavigator() {
   return (
-    <TabTwoStack.Navigator>
-      <TabTwoStack.Screen
+    <UserTabStack.Navigator>
+      <UserTabStack.Screen
         name="TabTwoScreen"
         component={TabTwoScreen}
         options={{ headerTitle: 'Tab Two Title' }}
       />
-    </TabTwoStack.Navigator>
+    </UserTabStack.Navigator>
   );
 }
